@@ -39,7 +39,7 @@ class AnimeRecommendationPipeline:
             response = self.recommender.get_recommendations_with_sources(query)
             
             logger.info(f"Sources retrieved: {len(response['sources'])} documents")
-            logger.info(f"Source Documents: {response['sources']}")
+            # logger.info(f"Source Documents: {response['sources']}")
 
             logger.info("Recommendations retrieved successfully")
             

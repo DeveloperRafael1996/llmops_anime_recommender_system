@@ -18,7 +18,7 @@ class AnimeRecommender:
             format = "\n\n".join(doc.page_content for doc in docs)
 
             logger.warning(f"Formatted {len(docs)} documents for LLM input.")
-            logger.warning(f"Formatted Documents Content: {format}")
+            # logger.warning(f"Formatted Documents Content: {format}")
             return format
 
         # Chain before LLM to format documents
