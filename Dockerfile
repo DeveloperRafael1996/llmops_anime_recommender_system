@@ -1,5 +1,5 @@
 ## Parent image
-FROM python:3.10-slim
+FROM python:3.12-slim
 
 ## Essential environment variables
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -17,8 +17,9 @@ RUN apt-get update && apt-get install -y \
 ## Copying ur all contents from local to app
 COPY . .
 
-## Run setup.py
-RUN pip install --no-cache-dir -e .
+## Run setup.py - forzar PyTorch CPU (sin CUDA/NVIDIA)
+RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu && \
+    pip install --no-cache-dir -e .
 
 # Used PORTS
 EXPOSE 8501
