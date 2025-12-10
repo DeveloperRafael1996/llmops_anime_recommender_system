@@ -1,9 +1,22 @@
 import streamlit as st
 from pipeline.pipeline import AnimeRecommendationPipeline
 from dotenv import load_dotenv
+from utils.logger import get_logger
+import warnings
 
 st.set_page_config(page_title="Anime Recommendation System", page_icon=":books:")
 load_dotenv()
+
+logger = get_logger(__name__)
+
+# Capturar todos los warnings y enviarlos al logger
+def warning_to_logger(message, category, filename, lineno, file=None, line=None):
+    """Captura warnings (incluyendo deprecaciones de LangChain) y los registra"""
+    logger.critical(f"{category.__name__}: {message} (in {filename}:{lineno})")
+
+warnings.showwarning = warning_to_logger
+
+logger.info("🎌 Starting Anime Recommendation System")
 
 @st.cache_resource
 def initialize_pipeline():

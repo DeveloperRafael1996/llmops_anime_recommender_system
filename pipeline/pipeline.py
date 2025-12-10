@@ -3,8 +3,16 @@ from src.recommender import AnimeRecommender
 from config.config import GROQ_API_KEY, MODEL_NAME
 from utils.logger import get_logger 
 from utils.custom_exception import CustomException
+import warnings
 
 logger = get_logger(__name__)
+
+# Capturar warnings y enviarlos al logger
+def warning_to_logger(message, category, filename, lineno, file=None, line=None):
+    """Captura warnings de deprecación y otros"""
+    logger.critical(f"{category.__name__}: {message} (in {filename}:{lineno})")
+
+warnings.showwarning = warning_to_logger
 
 class AnimeRecommendationPipeline:
     def __init__(self, persist_dir="chroma_db"):
